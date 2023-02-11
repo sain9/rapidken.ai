@@ -1,6 +1,9 @@
 <hr>
 <div fxLayout="row " fxLayoutGap="30px">
-  &nbsp;<button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' "  (click)="addEmpBtn()"><mat-icon>group_add</mat-icon>Add Employee</button>&nbsp;
+  &nbsp;
+  <a [routerLink]=" !isAdmin ? '/login' : null" routerLinkActive="active" >
+  <button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' "  (click)="addEmpBtn()"><mat-icon>group_add</mat-icon>Add Employee</button>
+</a>&nbsp;
 <button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' " (click)="listViewBtn()" class="list"><mat-icon>description</mat-icon>Employees List View</button>&nbsp;
 <button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' " (click)="cardViewBtn()" class="card"><mat-icon>credit_card</mat-icon>Employee Card View</button>
 </div>
@@ -85,7 +88,7 @@
 <mat-card class="example-card" *ngFor="let item of emp ;  let ind = index">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title><mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon> {{ item.name }}</mat-card-title>
+      <mat-card-title><mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon> <span>&nbsp;</span>{{ item.name }}</mat-card-title>
       <mat-card-subtitle>Name: {{ item.name}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
@@ -122,7 +125,7 @@
     <mat-expansion-panel *ngFor="let item of emp ;  let ind = index" hideToggle >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon> &nbsp;
+          <mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon>&nbsp; <span>&nbsp;</span>
           {{item.name}}
         </mat-panel-title>
         <mat-panel-description>
