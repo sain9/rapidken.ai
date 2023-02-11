@@ -1,0 +1,29 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .sBar {
+    height: 42%;
+  
+   border-color: antiquewhite;
+ color:  rgb(93, 32, 144);
+  width: 20%;
+  background-color: white;
+  font-weight: bold;
+ 
+  
+  }
+
+  input[type = text]:focus  {
+    outline-color: rgb(8, 56, 3);
+    width: 21%;
+    background-color: rgb(239, 234, 226);
+   
+  }
+
+  .ham {
+    border-color: white;
+    color: wheat;
+    background-color: transparent;
+  }
+  

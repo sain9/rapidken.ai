@@ -1,0 +1,45 @@
+
+
+<div>
+    <mat-toolbar [color]="logoutbtn ? 'accent'  :  'primary' " >
+      
+      <span><mat-icon>home</mat-icon> Employee Management</span>
+      <span class="example-spacer"></span>
+      <ng-container *ngIf="show" >
+        <input matInput
+          placeholder="search " 
+          class="sBar" 
+          type="text" 
+          [(ngModel)]="searchValue"
+          (input)="onSearchTxtChanged()"
+  >
+      </ng-container>
+      
+      <button  mat-icon-button (click)="search()">
+        <mat-icon >search</mat-icon>
+      </button>
+      
+      <button class="ham" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon >menu</mat-icon>
+      </button>
+    <mat-menu #menu="matMenu" yPosition="below">
+        <a  routerLink="/login" routerLinkActive="active" class="example-icon">
+            <button mat-menu-item>Login</button>
+        </a>
+        <a mat-icon-button routerLink="/employees" routerLinkActive="active" class="example-icon">
+          <button color="primary" mat-menu-item>Employees</button>
+      </a>
+    </mat-menu>
+    <ng-container *ngIf="logoutbtn" >
+      <a mat-stroked-button (click)="logOut()" href="/" >Logout</a>
+    </ng-container>
+    
+    </mat-toolbar>
+  </div>
+
+  
+  
+  
+  
+
+ 

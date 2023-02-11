@@ -1,0 +1,58 @@
+// .example-container {
+//   display: flex;
+//   flex-direction: column;
+  
+// }
+
+
+.example-card {
+  max-width: 700px;
+}
+
+
+.center-content {
+    margin-top: 100px;
+    text-align: -webkit-center;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+    margin-top: 10px;
+  width: 100%;
+}
+.mat-button{
+    margin-top: 10px;
+  width: 100%;
+  color: wheat;
+  height: 40px;
+  background-color: wheat;
+}
+
+
+.mat-tab-label {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: red;
+    color: red;
+    font-weight: 700;
+}
+.login-icon{
+    transform: scale(3);
+    display: flex; 
+    width: 100px;
+    height: 120px; 
+    align-items:center; 
+    justify-content: center;
+    position: center;
+    justify-self: center;
+    vertical-align: middle;
+}
+
+
+
+
+

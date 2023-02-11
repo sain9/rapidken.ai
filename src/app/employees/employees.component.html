@@ -1,0 +1,143 @@
+<hr>
+<div fxLayout="row " fxLayoutGap="30px">
+  &nbsp;<button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' "  (click)="addEmpBtn()"><mat-icon>group_add</mat-icon>Add Employee</button>&nbsp;
+<button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' " (click)="listViewBtn()" class="list"><mat-icon>description</mat-icon>Employees List View</button>&nbsp;
+<button mat-raised-button [color]="isAdmin ? 'accent'  :  'primary' " (click)="cardViewBtn()" class="card"><mat-icon>credit_card</mat-icon>Employee Card View</button>
+</div>
+
+<hr>
+<ng-container *ngIf="add"> 
+<hr>
+    <form  [formGroup]="editEmployeeForm" (ngSubmit)="onSubmit()">
+       <br><br><br>
+
+      <div fxLayout="column" fxLayoutAlign="center center">
+
+          <mat-card-header backGroundColor="primary" fxFlex="100%">
+            <mat-card-title backGroundColor="primary">{{editMode ? 'Edit Employee' : 'Register' }} </mat-card-title>
+          </mat-card-header>
+    <!-- // name -->
+        <mat-card-subtitle>Employee Details</mat-card-subtitle>
+        <div fxFlex="100%">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Full Name</mat-label>
+            <input class="form-control" formControlName="name" type="string" matInput placeholder="name" [(ngModel)]='employee.name' required>
+            <small *ngIf="!empForm.get('name') && empForm.get('name')" class="form-text text-danger">Please Enter Name.</small>  
+            <mat-icon [color]="isAdmin ? 'accent'  :  'primary' " matSuffix>account_circle</mat-icon>
+              
+          </mat-form-field>
+        </div>
+<!-- //position -->
+        <div fxFlex="100%">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Position</mat-label>
+              <input class="form-control" formControlName="position" type="text" matInput placeholder="Position" [(ngModel)]="employee.position" required>
+              <mat-icon [color]="isAdmin ? 'accent'  :  'primary' " matSuffix>label</mat-icon>
+              <!-- <small *ngIf="!empForm.get('name').valid && empForm.get('name').touched" class="form-text text-danger">Please Enter Name.</small> -->
+          </mat-form-field>
+        </div>
+      <!-- //about -->
+        <div fxFlex="100%">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>About</mat-label>
+                <input class="form-control" formControlName="about" type="text" matInput placeholder="About" [(ngModel)]='employee.about' required>
+                <mat-icon [color]="isAdmin ? 'accent'  :  'primary' " matSuffix >public</mat-icon>
+          </mat-form-field>
+        </div>
+<!-- //joining_date -->
+        <div fxFlex="100%">
+          <mat-form-field appearance="outline" class="form-field" appearance="fill">
+            <mat-label>Joining Date</mat-label>
+                <input class="form-control" opened="true" formControlName="joining_date" matInput [matDatepicker]="picker" [(ngModel)]='employee.joining_date' required>
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker  #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <br>
+        <div fxFlex="100%" *ngIf="!editMode">
+            <button mat-stroked-button [color]="isAdmin ? 'accent'  :  'primary' " type="submit" (click)="onSubmit()" >Submit<mat-icon>chevron_right</mat-icon></button>
+        </div>
+        <div fxFlex="100%" *ngIf="editMode">
+          <mat-card-subtitle>Click edit and start editing!</mat-card-subtitle>
+          <button mat-stroked-button [color]="isAdmin ? 'accent'  :  'primary' " type="submit" (click)="onSubmit()" >Edit<mat-icon>settings</mat-icon></button><span></span>&nbsp;
+          <button mat-stroked-button [color]="isAdmin ? 'accent'  :  'primary' " type="submit" (click)="onSubmit()" >Save<mat-icon>done_all</mat-icon></button>
+      </div>
+      </div>
+      
+  </form>
+    
+</ng-container>
+  
+
+
+
+<!-- 
+  display card
+ -->
+ <ng-container *ngIf="cardView">
+  <div
+  fxLayout="row wrap"
+  fxLayoutGap="32px"
+  fxLayoutAlign="flex-start"
+  
+  >
+<mat-card class="example-card" *ngFor="let item of emp ;  let ind = index">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title><mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon> {{ item.name }}</mat-card-title>
+      <mat-card-subtitle>Name: {{ item.name}}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    Position: {{ item.position}} <br>
+    About: {{ item.about}}
+    <mat-card-subtitle>Joining Date: {{ item.joining_date}}</mat-card-subtitle>
+  </mat-card-content>
+  <mat-card-actions>
+    <a [routerLink]=" !isAdmin ? '/login' : null" routerLinkActive="active" >
+    <button type="submit" mat-button (click)="onEdit(item, ind)">EDIT</button>
+    <button  mat-button (click)="onDelete(ind)">DELETE</button>
+</a>
+    
+
+  </mat-card-actions>
+</mat-card>
+</div>
+<style> 
+  .example-card {
+    align-content: center;
+  max-width: 30%;
+  margin-bottom: 3%;
+}
+</style>
+</ng-container>
+
+
+
+<!-- //List VIew  ------------------------------------------------------------    -->
+<ng-container *ngIf="listView" >
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let item of emp ;  let ind = index" hideToggle >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon> &nbsp;
+          {{item.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{item.joining_date}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>
+              Name: {{ item.name}} <br>
+              Position: {{ item.position}} <br>
+              About: {{ item.about}} <br>
+              Joining Date: {{ item.joining_date}}
+      </p>
+    </mat-expansion-panel>
+  
+  </mat-accordion>
+  
+
+</ng-container>

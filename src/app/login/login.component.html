@@ -1,0 +1,40 @@
+
+<div class="center-content" >
+
+  <mat-card class="example-card">
+    <mat-card-header backGroundColor="primary">
+      
+      
+    </mat-card-header>
+     
+    <mat-card-content >
+        <mat-icon class="login-icon" [color]="isAdmin ? 'accent'  :  'primary' " >account_circle</mat-icon>
+      <mat-tab-group  >
+  <mat-tab label="Login" >
+    <br>
+    <mat-card-subtitle>Knidly login first!</mat-card-subtitle>
+  <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input type="username" matInput placeholder="username" [(ngModel)]='user.username' >
+            <mat-icon matSuffix [color]="isAdmin ? 'accent'  :  'primary' ">account_box</mat-icon>
+          </mat-form-field>
+ <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input  [type]="hide ? 'password' : 'text'" matInput placeholder="Password" [(ngModel)]='user.password'>
+            <mat-icon matSuffix color="primary" (click)="Hide()">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <a mat-icon-button [routerLink]=" isAdmin ? '/employees' : null" routerLinkActive="active" class="example-icon">
+          <button mat-raised-button  [color]="isAdmin ? 'accent'  :  'primary' " (click)="submit(); isAdm()">Submit</button>
+          </a>
+          <br>
+    
+        </mat-tab>
+        
+      </mat-tab-group>
+     
+    </mat-card-content>
+ 
+  </mat-card>
+ 
+</div>
+
